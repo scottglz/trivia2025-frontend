@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-green-950: #031;
+  --color-wheat: wheat;
+  --color-plain-color: --color-text;
+  --color-link-color: --color-link;
+  --color-link-hover-color: --color-link-hover;
+  --color-bar-color: rgb(0, 0, 0);
+
+  --animate-skeleton: skeleton 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @keyframes skeleton {
+      0%, 100%: {
+        opacity: 0.5;
+      },
+      50%: {
+        opacity: .2;
+      }
+  }
+}
+
+
+@layer base {
+  :root {
+     --color-bar: rgb(0, 0, 0);
+     --scrollbarBG: #000;
+     --thumbBG: rgba(0, 51, 17);
+  }
+
+  html {
+     font-size: 11pt;
+     font-family: 'Nunito', sans-serif;
+  }
+
+  body::-webkit-scrollbar {
+     width: 11px;
+  }
+
+  * {
+     scrollbar-width: thin;
+     scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  }
+  
+  body::-webkit-scrollbar-track {
+     background: var(--scrollbarBG);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+     background-color: var(--thumbBG) ;
+     border-radius: 6px;
+     border: 3px solid var(--scrollbarBG);
+  }
+}
+
+@layer utilities {
+  .w-stream {
+     width: 800px;
+  }
+
+  .px-1\.5vw {
+     padding-left: 1.5vw;
+     padding-right: 1.5vw;
+  }
+
+  .vertical-rl {
+     writing-mode: vertical-rl;
+  }
+
+  .dark-area {
+     --color-text: rgb(255, 255, 255);
+     --color-link: rgb(128, 255, 128);
+     --color-link-hover: rgb(200, 255, 128);
+     color: rgba(var(--color-text));
+  }
+
+  .light-area {
+     --color-text: rgb(0, 0, 0);
+     --color-link: rgb(0, 128, 0);
+     --color-link-hover: rgb(0, 80, 0);
+     color: rgba(var(--color-text));
+  }
+
+  .template-columns-auto-180-1fr {
+     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+  
+  .template-columns-100-180 {
+     grid-template-columns: repeat(100,180px);
+  }
+}
