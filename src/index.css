@@ -52,39 +52,33 @@
   }
 }
 
-@layer utilities {
-  .w-stream {
-     width: 800px;
-  }
 
-  .px-1\.5vw {
-     padding-left: 1.5vw;
-     padding-right: 1.5vw;
-  }
+@utility w-stream {
+   width: 800px;
+}
 
-  .vertical-rl {
-     writing-mode: vertical-rl;
-  }
+@utility vertical-rl {
+   writing-mode: vertical-rl;
+}
 
-  .dark-area {
-     --color-text: rgb(255, 255, 255);
-     --color-link: rgb(128, 255, 128);
-     --color-link-hover: rgb(200, 255, 128);
-     color: rgba(var(--color-text));
-  }
+@utility dark-area {
+   --color-text: rgb(255, 255, 255);
+   --color-link: rgb(128, 255, 128);
+   --color-link-hover: rgb(200, 255, 128);
+   color: var(--color-text);
+}
 
-  .light-area {
-     --color-text: rgb(0, 0, 0);
-     --color-link: rgb(0, 128, 0);
-     --color-link-hover: rgb(0, 80, 0);
-     color: rgba(var(--color-text));
-  }
+@utility light-area {
+   --color-text: rgb(0, 0, 0);
+   --color-link: rgb(0, 128, 0);
+   --color-link-hover: rgb(0, 80, 0);
+   color: var(--color-text);
+}
 
-  .template-columns-auto-180-1fr {
-     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-  
-  .template-columns-100-180 {
-     grid-template-columns: repeat(100,180px);
-  }
+@utility template-columns-auto-180-1fr {
+   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+@utility template-columns-100-180 {
+   grid-template-columns: repeat(100,180px);
 }

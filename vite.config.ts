@@ -10,7 +10,7 @@ export default defineConfig({
    ],
    server: {
       proxy: {
-         '/trivia': 'http://localhost:3333'
+         '/api': 'http://localhost:3333'
       }
    }
 });

@@ -9,7 +9,7 @@ import { SigninView } from './signinview';
 import { useGradingQuestions, useRecentQuestions, useUnansweredQuestions, useUsers, useWhoAmI } from './datahooks';
 
 function VerticalStream(props: { children: ReactNode }) {
-   return <div className="w-stream max-w-full bg-white text-black flex flex-col gap-12 py-7 px-1.5vw m-auto min-h-full light-area">{props.children}</div>;
+   return <div className="w-stream max-w-full bg-white text-black flex flex-col gap-12 py-7 px-[1.5vw] m-auto min-h-full light-area">{props.children}</div>;
 }
 
 function ServerErrorSection() {
