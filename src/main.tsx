@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
      </StrictMode>
   );
 
-  const sse = new EventSource('/trivia/sse');
+  const sse = new EventSource('/api/sse');
   sse.addEventListener('message', ({ data }) => {
      const question = JSON.parse(data);
      updateCacheQuestion(queryClient, question);

@@ -35,47 +35,47 @@ export class DAO {
    }
 
    logout(): Promise<void> {
-      return this.ajax.post('/auth/logout');
+      return this.ajax.post('/api/logout');
    }
 
    submitEndVacation(): Promise<void> {
-      return this.ajax.post('/trivia/endvacation');
+      return this.ajax.post('/api/endvacation');
    }
 
    getWhoAmI(): Promise<userFull|false> {
-      return this.ajax.get('/trivia/whoami');
+      return this.ajax.get('/api/whoami');
    }
 
    getUsers(): Promise<userFull[]> {
-      return this.ajax.get('/trivia/users');
+      return this.ajax.get('/api/users');
    }
 
    getQuestions(vars: GetQuestionsData): Promise<QuestionWire[]> {
-      return this.ajax.post('/trivia/questions', vars);
+      return this.ajax.post('/api/questions', vars);
    }  
 
    submitGuess(data: SubmitGuessData): Promise<QuestionWire> {
-      return this.ajax.put('/trivia/guess', data);
+      return this.ajax.put('/api/guess', data);
    }
 
    submitGrades(vars: SubmitGradesData): Promise<QuestionWire> {
-      return this.ajax.put('/trivia/grade', vars);
+      return this.ajax.put('/api/grade', vars);
    }
 
    editAnswer(data: EditAnswerData): Promise<QuestionWire> {
-      return this.ajax.put('/trivia/editanswer', data);
+      return this.ajax.put('/api/editanswer', data);
    }
 
    editGrade(data: EditGradeData): Promise<QuestionWire> {
-      return this.ajax.put('/trivia/editgrade', data);
+      return this.ajax.put('/api/editgrade', data);
    }
 
    submitComment(day: string, comment: string): Promise<void> {
-      return this.ajax.post('/trivia/comments/add', { day, comment });
+      return this.ajax.post('/api/comments/add', { day, comment });
    }
 
    sendLoginEmailRequest(vars: SendLoginEmailRequestData): Promise<void> {
-      return this.ajax.post('/auth/requestemailsignin', vars);
+      return this.ajax.post('/api/requestemailsignin', vars);
    }
 }
 
