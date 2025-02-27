@@ -18,7 +18,7 @@ function NavLink({
 } : props) {
 
    return (
-      <RouterLink to={to} end={end} title={title} className={({isActive}) => `no-underline hover:text-link-hover-color hover:underline ${className} ${isActive ? 'text-plain-color pointer-events-none' : 'text-link-color cursor-pointer'}`} >
+      <RouterLink to={to} end={end} title={title} className={({isActive}) => `no-underline hover:text-link-hover hover:underline ${className} ${isActive ? 'text-plain-text pointer-events-none' : 'text-link-text cursor-pointer'}`} >
          {children}
       </RouterLink>
    );

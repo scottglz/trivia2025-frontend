@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
+/* inline themes just take raw CSS variables instead of doing weird tailwind stuff */
+@theme inline {
+   --color-link-text: var(--linktextcolor);
+   --color-plain-text: var(--plaintextcolor);
+   --color-link-hover: var(--linkhovercolor);
+}
+
 @theme {
   --color-green-950: #031;
   --color-wheat: wheat;
-  --color-plain-color: --color-text;
-  --color-link-color: --color-link;
-  --color-link-hover-color: --color-link-hover;
   --color-bar-color: rgb(0, 0, 0);
 
   --animate-skeleton: skeleton 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -61,18 +65,27 @@
    writing-mode: vertical-rl;
 }
 
+@custom-variant {
+   .dark-area {
+      @apply bg-color-green-950;
+   }
+   .light-area {
+      @apply bg-color-wheat;
+   }
+}
+
 @utility dark-area {
-   --color-text: rgb(255, 255, 255);
-   --color-link: rgb(128, 255, 128);
-   --color-link-hover: rgb(200, 255, 128);
-   color: var(--color-text);
+   --plaintextcolor: rgb(255, 255, 255);
+   --linktextcolor: rgb(128, 255, 128);
+   --linkhovercolor: rgb(200, 255, 200);
+   color: var(plaintextcolor);
 }
 
 @utility light-area {
-   --color-text: rgb(0, 0, 0);
-   --color-link: rgb(0, 128, 0);
-   --color-link-hover: rgb(0, 80, 0);
-   color: var(--color-text);
+   --plaintextcolor: rgb(0, 0, 0);
+   --linktextcolor: rgb(0, 128, 0);
+   --linkhovercolor: rgb(0, 80, 0);
+   color: var(plaintextcolor);
 }
 
 @utility template-columns-auto-180-1fr {

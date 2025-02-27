@@ -12,7 +12,7 @@ function Link({
    onClick
 } : props) {
    return (
-      <a href={href} className="inline-block no-underline hover:text-link-hover-color hover:underline text-link-color cursor-pointer" onClick={onClick}>
+      <a href={href} className="inline-block no-underline text-link-text hover:text-link-hover hover:underline cursor-pointer" onClick={onClick}>
          {children}
       </a>
    );

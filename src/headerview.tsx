@@ -63,7 +63,7 @@ export default function HeaderView() {
 
    return <div className="sticky top-0 h-8 z-10 bg-bar-color flex justify-between items-center dark-area sm:border-r border-green-950">
       <div className="flex gap-4 items-center bg-gradient-to-r from-green-900 to-transparent px-2">
-         <RouterLink title="Home Page" to="/" className="group flex items-center gap-2 text-link-color hover:text-link-hover-color hover:underline font-semibold">
+         <RouterLink title="Home Page" to="/" className="group flex items-center gap-2 text-link-text hover:text-link-hover hover:underline font-semibold">
             <img src={triviaLogo} alt="Trivia Logo" className="group-hover:scale-125 transition-transform bg-black p-1 border-4 border-[#00bc00] rounded-full"/>
             trivia.
          </RouterLink>
