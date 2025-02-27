@@ -32,7 +32,7 @@ function UserAnswerHeader({name}: { name: string }) {
 }
 
 function UserAnswerCell({className='', children}: childrenAndClassNameProps) {
-   return <ScoresTableEntry className={`w-7 bg-white text-gray-600 border-r border-b border-gray-800 ${className}`}>{children}</ScoresTableEntry>
+   return <ScoresTableEntry className={`w-7 text-gray-600 border-r border-b border-gray-800 ${className}`}>{children}</ScoresTableEntry>
 }
 
 
@@ -53,12 +53,13 @@ function UsersAnswersCells(props : {
          const pending = typeof(guess.correct) !== 'boolean' && guess.guess.length > 0;
          const classes = classNames({
             'bg-green-200': guess.correct === true, 
-            'bg-rose-500': guess.correct === false
+            'bg-rose-500': guess.correct === false,
+            'bg-white': typeof(guess.correct) !== 'boolean'
          });
          return <UserAnswerCell key={guess.guessid} className={classes}>{pending && <BsChatQuote className="bg-white w-full h-full p-1"/>}</UserAnswerCell>;
       }
       else {
-         return <UserAnswerCell key={'?' + userid } />;
+         return <UserAnswerCell key={'?' + userid } className="bg-white"/>;
       }
    });
    
