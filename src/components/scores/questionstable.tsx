@@ -63,7 +63,6 @@ function UsersAnswersCells(props : {
       }
    });
    
-   // eslint-disable-next-line react/jsx-no-useless-fragment
    return <>{userCells}</>;
 }
 
