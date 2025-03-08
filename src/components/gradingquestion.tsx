@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { UpDownThumbs } from './updownthumbs';
 import { formatDateFancy, GuessWire } from '@scottglz/trivia2025-shared';
 import Button from './button';
@@ -10,14 +10,14 @@ import { useGradeMutation } from '../datahooks';
 function GradingGuess(props: {
    guess: GuessWire,
    correct: boolean,
-   onChangeGrade: (guess: GuessWire, correct: boolean) => void
+   onChangeGrade: (guess: GuessWire, correct: boolean, event: React.MouseEvent) => void
 }) {
    const correct = props.correct;
    const guess = props.guess;
    return (
-      <div className="guess">
-         <UpDownThumbs value={correct} onChange={correct => props.onChangeGrade(guess, correct)}/>
-         <span className="ml-3">{guess.guess}</span>  
+      <div className="guess flex items-center gap-4">
+         <UpDownThumbs value={correct} onChange={(correct, event) => props.onChangeGrade(guess, correct, event)}/>
+         <span>{guess.guess}</span>  
       </div>        
    );
 }
@@ -36,20 +36,36 @@ export function GradingQuestion(props: gradingQuestionProps) {
    const [answer, setAnswer] = useState('');
    const [gradesByUserId, setGradesByUserId] = useState({} as Record<number, boolean>);
    const  { mutate: save, isLoading: saving, isError, error } = useGradeMutation();
+   const guesses = Object.values(question.guessesMap);
 
    function onEditInput(ev: ChangeEvent<HTMLInputElement>) {
       setAnswer(ev.target.value);
    }
    
-   function onChangeGrade(guess: GuessWire, correct: boolean) {
+   function onChangeGrade(guess: GuessWire, correct: boolean, event: React.MouseEvent) {
       if (!answer && correct) {
          // If an answer hasn't been entered yet and we marked something correct,
          // set that guess as the answer
          setAnswer(guess.guess);
       }
-      setGradesByUserId(oldMap => {
-         return { ...oldMap, [guess.userid]: correct};
-      });
+
+      if (event.shiftKey || event.ctrlKey) {
+         // If shift or control is held, only specific grade
+         setGradesByUserId(oldMap => {
+            return { ...oldMap, [guess.userid]: correct};
+         });
+      } 
+      else {
+         setGradesByUserId(oldMap => {
+            const newMap = { ...oldMap };
+            for (const someGuess of guesses) {
+               if (someGuess.guess.trim().toLowerCase() === guess.guess.trim().toLowerCase()) {
+                  newMap[someGuess.userid] = correct;
+               }
+            }
+            return newMap;
+         });
+      }
    }
    
    function onClickSubmit() {
@@ -66,7 +82,7 @@ export function GradingQuestion(props: gradingQuestionProps) {
       }); 
    }
    
-   const guesses = Object.values(question.guessesMap);
+
    const ready = !!answer.trim() && !saving && guesses.every(guess =>
       typeof gradesByUserId[guess.userid] === 'boolean'
    );
@@ -81,7 +97,7 @@ export function GradingQuestion(props: gradingQuestionProps) {
             Correct Answer:
             <TextInput className="ml-3" value={answer} onChange={onEditInput} readOnly={saving}/>
          </div>    
-         <div>
+         <div className="flex flex-col gap-2">
             {guesses.map(guess => <GradingGuess key={guess.guessid} guess={guess} correct={gradesByUserId[guess.userid]} onChangeGrade={onChangeGrade}/>)}
          </div>
          <div>
