@@ -32,7 +32,7 @@ export function SigninView() {
       const location = window.location;
       const baseUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
       const redirectUrl = baseUrl + '/api/slackredirect';
-      const slackUrl = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.avatar&client_id=456894231392.459012826326&&redirect_uri="  + encodeURIComponent(redirectUrl) + '&state=' + encodeURIComponent(baseUrl);
+      const slackUrl = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.avatar&client_id=456894231392.459012826326&&team=TDESA6TBJ&redirect_uri="  + encodeURIComponent(redirectUrl) + '&state=' + encodeURIComponent(baseUrl);
       return <div className="text-center"><div className="inline-flex flex-col gap-2 items-center p-4 bg-green-200 light-area rounded-xl max-w-full">
          <p>Send me a magic login link</p>
          <form className="flex gap-4 items-center max-w-full flex-wrap justify-center" onSubmit={onClickSubmit}>
