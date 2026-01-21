@@ -2,6 +2,14 @@ import { CategoryTable } from './categorytable';
 import { useScoresData, useQuestionsPlus, useActiveUsers } from '../../datahooks';
 import NavLink from '../navlink';
 
+function LeaderboardWrapper({ children }: { children: React.ReactNode }) {
+   return (
+      <div className="flex flex-col gap-2 items-center xl:fixed xl:right-10 xl:top-16 xl:dark-area">
+         {children}
+      </div>
+   );
+}
+
 export function Leaderboard(props: {
    year: number
 }) {
@@ -12,22 +20,26 @@ export function Leaderboard(props: {
 
    if (isLoadingScores || isLoadingUsers || isLoadingQuestions) {
       return (
-         <div className="flex flex-col gap-2 items-center xl:fixed xl:right-10 xl:top-16 xl:dark-area">
-            <h2 className="font-bold text-plain-text">Leaderboards</h2>
+         <LeaderboardWrapper>
             <div className="flex gap-4 xl:flex-col xl:items-stretch overflow-x-auto max-w-full">
                { [1,2].map((key) => <CategoryTable.Skeleton key={key} />) }
             </div>
-         </div>
+         </LeaderboardWrapper>
       );
    }
 
    if (scoresData && questionsArray && activeUsers) {
       const leaderboardCategories = scoresData.filter(category => category.inLeaderboard);
       if (!leaderboardCategories.length) {
-         return null;
+         return (
+            <LeaderboardWrapper>
+               <div>No scores yet for {year}</div>
+               <NavLink to="/scores">Older Scores</NavLink>
+            </LeaderboardWrapper>
+         )
       }
       return (
-         <div className="flex flex-col gap-2 items-center xl:fixed xl:right-10 xl:top-16 xl:dark-area">
+         <LeaderboardWrapper>
             <div className="flex gap-4 xl:flex-col xl:items-stretch overflow-x-auto max-w-full">
                {
                   leaderboardCategories.map(category => (
@@ -36,7 +48,7 @@ export function Leaderboard(props: {
                }
             </div>
             <NavLink to="/scores">More Scores</NavLink>
-         </div>
+         </LeaderboardWrapper>
       );
    }
    else {
